@@ -51,4 +51,5 @@ abstract public class MemoryDbRepostoryAbstract<T extends MemoryDbEntity> implem
     public List<T> listAll() {
         return db;
     }
+
 }
