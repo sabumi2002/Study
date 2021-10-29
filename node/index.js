@@ -17,7 +17,12 @@ const connect = mysql.createConnection({
 server.get("/",(req,res)=>{
     res.send("hello!");
 })
-
+server.post("/register",(req,res)=>{
+    console.log(req.body.id);
+    console.log(req.body.pw);
+    res.send("데이터 전송 완료");
+})
+/*
 server.post("/register",(req,res)=>{
     connect.query(select count(*) as cnt from user where id="${req.body.id}",(err,result)=>{
         if(err) {
@@ -64,7 +69,7 @@ server.post("/login",(req,res)=>{
 
     })
 })
-
+*/
 server.listen(4545,()=>{
     console.log("server ON!!");
 })
