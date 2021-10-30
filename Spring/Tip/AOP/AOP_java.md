@@ -10,6 +10,7 @@ public class Main {
         Exam proxy = (Exam) Proxy.newProxyInstance(NewlecExam.class.getClassLoader(),
                 new Class[]{Exam.class},
                 new InvocationHandler() {
+
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         long start = System.currentTimeMillis();
@@ -29,5 +30,6 @@ exam을 proxy로 복제한다.
 proxy 인스턴스를 생성한다.
 // Proxy.newProxyInstance(ClassLoader loader, Class<?>[] interfaces, InvocationHandler h)
 
-원래 객체 메소드 앞뒤로 corss-cutting 한다.
+public Object invoke() 앞뒤로 corss-cutting 한다.
+
 result를 반환한다
