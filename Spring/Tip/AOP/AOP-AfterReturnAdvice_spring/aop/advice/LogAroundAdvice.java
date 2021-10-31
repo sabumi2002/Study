@@ -3,8 +3,6 @@ package com.example.springtest.aop.advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-// around-advice´Â ÀÎÅÍÆäÀÌ½º·Î MethodInterceptor ¸¦ ³Ö¾î¾ßÇÔ.
-
 public class LogAroundAdvice implements MethodInterceptor {
 
   @Override
@@ -14,7 +12,7 @@ public class LogAroundAdvice implements MethodInterceptor {
     Object result = invocation.proceed();
 
     long end = System.currentTimeMillis();
-    String message = (end-start)+"ms ?œê°„??ê±¸ë ¸?µë‹ˆ??";
+    String message = (end-start)+"ms ì‹œê°„ì´ ê±¸ë ¸ìŠµë‹ˆë‹¤.";
     System.out.println(message);
     return result;
   }
