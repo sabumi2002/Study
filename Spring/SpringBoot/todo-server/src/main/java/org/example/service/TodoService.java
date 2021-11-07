@@ -47,7 +47,6 @@ public class TodoService {
     }
     return this.todoRepository.save(todoEntity);
   }
-
   public void deleteById(Long id) {
     this.todoRepository.deleteById(id);
   }
