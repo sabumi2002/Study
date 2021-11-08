@@ -54,7 +54,9 @@ class TodoControllerTest {
     TodoRequest request = new TodoRequest();
     request.setTitle("ANY TITLE");
 
+    // request를 body로 넣어야하는데 오브젝트타입자체로 넣을수없기떄문에 objectMapper를 써서 body에 넣어줌
     ObjectMapper mapper = new ObjectMapper();
+    // request를 String형태로 바꿈
     String content = mapper.writeValueAsString(request);
 
     this.mvc.perform(post("/")

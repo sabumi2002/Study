@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.model.TodoEntity;
 import org.example.model.TodoRequest;
 import org.example.model.TodoResponse;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j  // log를 쓰기위해 @Slf4j 어노테이션 추가
 @CrossOrigin  // CORS(Cross-origin resource sharing)
 @AllArgsConstructor // 모든 필드 값을 파라미터로 받는 생성자를 만듦
 @RestController
@@ -21,7 +23,7 @@ public class TodoController {
 
   @PostMapping  // localhost:8080 , json으로 값을 주면 @RequestBody가 읽어옴
   public ResponseEntity<TodoResponse> create(@RequestBody TodoRequest request) {
-    System.out.println("CREATE");
+    log.info("CREATE");
 
     if (ObjectUtils.isEmpty(request.getTitle()))
       return ResponseEntity.badRequest().build();
@@ -37,32 +39,32 @@ public class TodoController {
   }
   @GetMapping("{id}") // localhost:8080/1 처럼 id를 입력하면 @PathVariable이 url의 {id}를 읽어옴
   public ResponseEntity<TodoResponse> readOne(@PathVariable Long id){
-    System.out.println("READ ONE");
+    log.info("READ ONE");
     TodoEntity result = this.service.searchById(id);
     return ResponseEntity.ok(new TodoResponse(result));
   }
   @GetMapping
   public ResponseEntity<List<TodoResponse>> readAll(){
-    System.out.println("READ ALL");
+    log.info("READ ALL");
     List<TodoEntity> list = this.service.searchAll();
     List<TodoResponse> response = list.stream().map(TodoResponse::new).collect(Collectors.toList());
     return ResponseEntity.ok(response);
   }
   @PatchMapping("{id}") // localhost:8080/1 처럼 id를 입력하면 @PathVariable이 url의 {id}를 읽어옴
   public ResponseEntity<TodoResponse> update(@PathVariable Long id, @RequestBody TodoRequest request){
-    System.out.println("UPDATE");
+    log.info("UPDATE");
     TodoEntity result = this.service.updateById(id, request);
     return ResponseEntity.ok(new TodoResponse(result));
   }
   @DeleteMapping("{id}")  // localhost:8080/1 처럼 id를 입력하면 @PathVariable이 url의 {id}를 읽어옴
   public ResponseEntity<?> deleteOne(@PathVariable Long id){
-    System.out.println("DELETE");
+    log.info("DELETE");
     this.service.deleteById(id);
     return ResponseEntity.ok().build(); // 리턴값이 없다.
   }
   @DeleteMapping
   public ResponseEntity<?> deleteAll(){
-    System.out.println("DELETE ALL");
+    log.info("DELETE ALL");
     this.service.deleteAll();
     return ResponseEntity.ok().build();
   }
