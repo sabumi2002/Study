@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TodoResponse {
-  private Long id; //Entity의 모든값을 내려줄수있어야하니 Long타입으로 만듬
+  private Long id; // Entity의 모든값을 내려줄수있어야하니 Long타입으로 만듦
   private String title;
   private Long order;
   private Boolean completed;

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class TodoController {
   private final TodoService service;
 
-  @PostMapping
+  @PostMapping  // localhost:8080 , json으로 값을 주면 @RequestBody가 읽어옴
   public ResponseEntity<TodoResponse> create(@RequestBody TodoRequest request) {
     System.out.println("CREATE");
 
@@ -35,7 +35,7 @@ public class TodoController {
     TodoEntity result = this.service.add(request);
     return ResponseEntity.ok(new TodoResponse(result));
   }
-  @GetMapping("{id}") // localhost:8080/1 처럼 id를 입력해주어야함
+  @GetMapping("{id}") // localhost:8080/1 처럼 id를 입력하면 @PathVariable이 url의 {id}를 읽어옴
   public ResponseEntity<TodoResponse> readOne(@PathVariable Long id){
     System.out.println("READ ONE");
     TodoEntity result = this.service.searchById(id);
@@ -48,13 +48,13 @@ public class TodoController {
     List<TodoResponse> response = list.stream().map(TodoResponse::new).collect(Collectors.toList());
     return ResponseEntity.ok(response);
   }
-  @PatchMapping("{id}") // localhost:8080/1 처럼 id를 입력해주어야함
+  @PatchMapping("{id}") // localhost:8080/1 처럼 id를 입력하면 @PathVariable이 url의 {id}를 읽어옴
   public ResponseEntity<TodoResponse> update(@PathVariable Long id, @RequestBody TodoRequest request){
     System.out.println("UPDATE");
     TodoEntity result = this.service.updateById(id, request);
     return ResponseEntity.ok(new TodoResponse(result));
   }
-  @DeleteMapping("{id}")  // localhost:8080/1 처럼 id를 입력해주어야함
+  @DeleteMapping("{id}")  // localhost:8080/1 처럼 id를 입력하면 @PathVariable이 url의 {id}를 읽어옴
   public ResponseEntity<?> deleteOne(@PathVariable Long id){
     System.out.println("DELETE");
     this.service.deleteById(id);
