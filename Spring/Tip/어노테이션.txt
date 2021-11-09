@@ -1,0 +1,11 @@
+@RestController
+@RequestMapping("/api")
+@GetMapping("/")
+@PostMapping("/")
+@RequestParam
+@RequestBody
+@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)  // json을 snakeCase로 바꿔줌
+
+@Controller
+
+@JsonInclude(JsonInclude.Include.NON_NULL)	// json에서 null값은 포함시키지 않겠다. 리스폰 객체에 넣어줘야함

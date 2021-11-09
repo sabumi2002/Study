@@ -6,6 +6,7 @@ import org.example.model.TodoEntity;
 import org.example.model.TodoRequest;
 import org.example.model.TodoResponse;
 import org.example.service.TodoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,7 @@ public class TodoController {
     log.info("READ ONE");
     TodoEntity result = this.service.searchById(id);
     return ResponseEntity.ok(new TodoResponse(result));
+//    return ResponseEntity.status(HttpStatus.CREATED).body(new TodoResponse(result));
   }
   @GetMapping
   public ResponseEntity<List<TodoResponse>> readAll(){
