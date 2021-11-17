@@ -1,0 +1,6 @@
+object -> text
+objectMapper는 get method를 활용한다
+
+text -> object
+objectMapper는 default 생성자를 필요로 한다.
+
