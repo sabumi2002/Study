@@ -6,6 +6,7 @@ import org.example.model.TodoEntity;
 import org.example.model.TodoRequest;
 import org.example.model.TodoResponse;
 import org.example.service.TodoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
@@ -20,15 +21,17 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/")  // 베이스 url 설정
 public class TodoController {
+
+  @Autowired
   private final TodoService service;
 
   @PostMapping  // localhost:8080 , json으로 값을 주면 @RequestBody가 읽어옴
   public ResponseEntity<TodoResponse> create(@RequestBody TodoRequest request) {
     log.info("CREATE");
 
-    if (ObjectUtils.isEmpty(request.getTitle()))
+    if (ObjectUtils.isEmpty(request.getTitle())) {
       return ResponseEntity.badRequest().build();
-
+    }
     if (ObjectUtils.isEmpty(request.getOrder()))
       request.setOrder(0L); // default 값 입력
 

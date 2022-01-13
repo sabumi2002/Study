@@ -9,3 +9,8 @@
 @Controller
 
 @JsonInclude(JsonInclude.Include.NON_NULL)	// json에서 null값은 포함시키지 않겠다. 리스폰 객체에 넣어줘야함
+
+@Component
+@Qualifier("")	// 빈의 이름을 지정해줄수있다.
+
+
