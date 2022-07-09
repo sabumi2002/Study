@@ -1,19 +1,16 @@
-N= int(input())
-
-sol = [[0, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
-result = 0
-
-
+N ,K= map(int, input().split())
+dp = [[0 for _ in range(K + 1)] for _ in range(N + 1)]
+stuff = [[0, 0]]
 for i in range(N):
-    sol.append([])
-    for j in range(10):
-        if j==0:
-            sol[i+1].append(sol[i][1])
-        elif j==9:
-            sol[i+1].append(sol[i][8])
+    stuff.append(list(map(int, input().split())))
+
+for i in range(1, N+1):
+    weight = stuff[i][0]
+    value = stuff[i][1]
+    for j in range(1, K+1):
+        if j < weight:
+            dp[i][j] = dp[i-1][j]
         else:
-            sol[i+1].append(sol[i][j-1] + sol[i][j+1])
+            dp[i][j] = max(dp[i-1][j-weight]+value, dp[i-1][j])
 
-result = sum(sol[N-1])
-
-print(result%1000000000)
+print(dp[N][K])
