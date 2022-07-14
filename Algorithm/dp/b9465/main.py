@@ -28,5 +28,5 @@ for _ in range(T):
         dp[0][i] = max(dp[0][i - 1], max(max2, max3, max5))
         dp[1][i] = max(dp[1][i - 1], max(max1, max4, max6))
 
-
+    print(dp)
     print(max(dp[0][n], dp[1][n]))
