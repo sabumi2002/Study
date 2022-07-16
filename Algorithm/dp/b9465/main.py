@@ -1,32 +1,14 @@
-T = int(input())
-
-for _ in range(T):
-    A = [[0], [0]]
-    n = int(input())
-    dp = [[0 for _ in range(n+1)] for _ in range(2)]
-
-    A[0] += list(map(int, input().split()))
-    A[1] += list(map(int, input().split()))
-
-    dp[0][1] = A[0][1]
-    dp[1][1] = A[1][1]
-
-    if(n>1):
-
-        dp[1][2] = A[0][1]+A[1][2]
-        dp[0][2] = A[1][1]+A[0][2]
-
-
-    for i in range(3, n+1):
-        max1 = dp[0][i-3] + A[1][i - 2]+A[0][i - 1]+A[1][i]
-        max2 = dp[0][i-3] + A[1][i - 2]+A[0][i]
-        max3 = dp[1][i-3] + A[0][i - 2]+A[1][i - 1]+A[0][i]
-        max4 = dp[1][i-3] + A[0][i - 2]+A[1][i]
-        max5 = max(dp[0][i-3], dp[1][i-3]) + A[1][i-1]+A[0][i]
-        max6 = max(dp[0][i-3], dp[1][i-3]) + A[0][i-1]+A[1][i]
-
-        dp[0][i] = max(dp[0][i - 1], max(max2, max3, max5))
-        dp[1][i] = max(dp[1][i - 1], max(max1, max4, max6))
-
-    print(dp)
-    print(max(dp[0][n], dp[1][n]))
+t = int(input())
+for i in range(t):
+  s = []
+  n = int(input())
+  for k in range(2):
+    s.append(list(map(int, input().split())))
+  for j in range(1, n):
+    if j == 1:
+      s[0][j] += s[1][j - 1]
+      s[1][j] += s[0][j - 1]
+    else:
+      s[0][j] += max(s[1][j - 1], s[1][j - 2])
+      s[1][j] += max(s[0][j - 1], s[0][j - 2])
+  print(max(s[0][n - 1], s[1][n - 1]))
